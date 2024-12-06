@@ -1,0 +1,26 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch API</title>
+</head>
+<body>
+    <h1>Содержимое файла:</h1>
+    <div id="file-content"></div>
+
+    <script>
+        fetch('fetch_api.txt')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Ошибка сети: ' + response.status);
+                }
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('file-content').textContent = data;
+            })
+            .catch(error => {
+                console.error('Произошла ошибка:', error);
+            });
+    </script>
+</body>
+</html>

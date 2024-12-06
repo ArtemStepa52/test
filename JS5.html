@@ -1,0 +1,37 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Динамическая смена цвета фона</title>
+    <style>
+        body {
+            transition: background-color 0.5s;
+            font-family: 'Franklin Gothic Medium';
+        }
+        #color-info {
+            font-family: 'Franklin Gothic Medium';
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        button {
+            border-radius: 10px;
+            width: 10vh;
+            height: 5vh;
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Смена цвета фона</h1>
+    <button id="change-color-button">Сменить фон</button>
+    <div id="color-info"></div>
+
+    <script>
+        document.getElementById('change-color-button').addEventListener('click', function() {
+            const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+            document.body.style.backgroundColor = randomColor;
+            document.getElementById('color-info').textContent = `Текущий цвет фона: ${randomColor}`;
+        });
+    </script>
+</body>
+</html>

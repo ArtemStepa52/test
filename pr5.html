@@ -1,0 +1,98 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Смена фона</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      transition: background-color 0.5s ease;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      background-color: #00fbff;
+      color: rgb(0, 0, 0);
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #ffffff;
+    }
+
+    .color-info {
+      font-size: 20px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .color-code {
+      font-size: 22px;
+      color: #333;
+      display: block;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <button id="changeColorBtn">Смена фона</button>
+    <div class="color-info">
+      Цвет фона: <span class="color-code" id="colorName">#ffffff</span> 
+    </div>
+  </div>
+
+  <script>
+    // Массив названий цветов
+    const colorNames = {
+      "#ffffff": "Белый",
+      "#000000": "Черный",
+      "#ff0000": "Красный",
+      "#00ff00": "Зеленый",
+      "#0000ff": "Синий",
+      "#ffff00": "Желтый",
+      "#ff00ff": "Пурпурный",
+      "#00ffff": "Циан",
+      "#ff8000": "Оранжевый",
+      "#800080": "Фиолетовый",
+    };
+
+    // Функция для генерации случайного цвета в формате #RRGGBB
+    function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    // Функция для изменения фона и отображения информации о цвете
+    function changeBackgroundColor() {
+      const newColor = getRandomColor();
+      document.body.style.backgroundColor = newColor;
+      const colorName = colorNames[newColor] || "Неизвестный цвет"; // Используем словарь или показываем "Неизвестный цвет"
+      document.getElementById('colorName').textContent = newColor;
+      document.getElementById('colorName').style.color = newColor; // Текст цвета будет того же цвета
+    }
+
+    // Назначаем обработчик события на кнопку
+    document.getElementById('changeColorBtn').addEventListener('click', changeBackgroundColor);
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Музыкальные Альбомы</title>
+</head>
+<body>
+  <header>
+    <h1>Музыкальные Альбомы</h1>
+  </header>
+  <style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  overflow-x: hidden;
+}
+
+header {
+  text-align: center;
+  background-color: #0f295d;
+  color: white;
+  padding: 20px;
+}
+
+main {
+  padding: 20px;
+}
+
+.albums {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  opacity: 0; /* Для анимации появления */
+  transform: translateY(20px);
+  animation: fadeIn 1s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.album {
+  text-align: center;
+  margin: 20px;
+  cursor: pointer;
+  transition: transform 0.3s, filter 0.3s;
+}
+
+.album:hover {
+  transform: scale(1.1) rotate(5deg);
+  filter: brightness(1.2);
+}
+
+.cd {
+  width: 150px;
+  height: 150px;
+}
+
+#album-info {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5); /* Начальное состояние */
+  background-color: white;
+  border: 2px solid #ccc;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  display: none; /* Скрываем окно */
+  animation: popUp 0.3s ease-out forwards; /* Анимация появления */
+}
+
+@keyframes popUp {
+  from {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+#close-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+#close-btn:hover {
+  background-color: #d32f2f;
+}
+
+
+  </style>
+  <main>
+    <div class="albums">
+      <!-- Генерируем блоки альбомов -->
+      <div class="album" data-title="Empire Burlesque" data-artist="Bob Dylan" data-country="USA" data-label="Columbia" data-price="10.90" data-year="1985">
+        <img src="cd1.png" alt="CD 1" class="cd">
+        <p>Empire Burlesque</p>
+      </div>
+      <div class="album" data-title="Hide your heart" data-artist="Bonnie Tyler" data-country="UK" data-label="CBS Records" data-price="9.90" data-year="1988">
+        <img src="cd2.png" alt="CD 2" class="cd">
+        <p>Hide your heart</p>
+      </div>
+      <div class="album" data-title="Greatest Hits" data-artist="Dolly Parton" data-country="USA" data-label="RCA" data-price="9.90" data-year="1982">
+        <img src="cd3.png" alt="CD 3" class="cd">
+        <p>Greatest Hits</p>
+      </div>
+      
+      <!-- Продолжить добавлять блоки для остальных альбомов -->
+    </div>
+
+    <div id="album-info" class="hidden">
+      <h2>Информация об альбоме</h2>
+      <p><strong>Название:</strong> <span id="album-title"></span></p>
+      <p><strong>Исполнитель:</strong> <span id="album-artist"></span></p>
+      <p><strong>Страна:</strong> <span id="album-country"></span></p>
+      <p><strong>Лейбл:</strong> <span id="album-label"></span></p>
+      <p><strong>Цена:</strong> <span id="album-price"></span></p>
+      <p><strong>Год:</strong> <span id="album-year"></span></p>
+      <button id="close-btn">Закрыть</button>
+    </div>
+  </main>
+  <script>
+    // Получение элементов
+const albums = document.querySelectorAll('.album');
+const albumInfo = document.getElementById('album-info');
+const titleSpan = document.getElementById('album-title');
+const artistSpan = document.getElementById('album-artist');
+const countrySpan = document.getElementById('album-country');
+const labelSpan = document.getElementById('album-label');
+const priceSpan = document.getElementById('album-price');
+const yearSpan = document.getElementById('album-year');
+const closeBtn = document.getElementById('close-btn');
+
+// Функция для отображения информации об альбоме
+function showAlbumInfo(event) {
+  const album = event.currentTarget;
+  titleSpan.textContent = album.dataset.title;
+  artistSpan.textContent = album.dataset.artist;
+  countrySpan.textContent = album.dataset.country;
+  labelSpan.textContent = album.dataset.label;
+  priceSpan.textContent = `$${album.dataset.price}`;
+  yearSpan.textContent = album.dataset.year;
+
+  // Показываем всплывающее окно
+  albumInfo.style.display = 'block';
+  albumInfo.classList.remove('hidden');
+}
+
+// Функция для скрытия информации об альбоме
+function hideAlbumInfo() {
+  albumInfo.classList.add('hidden');
+  setTimeout(() => {
+    albumInfo.style.display = 'none';
+  }, 300); // Ждем окончания анимации
+}
+
+// Добавление обработчиков событий
+albums.forEach(album => {
+  album.addEventListener('click', showAlbumInfo);
+});
+
+closeBtn.addEventListener('click', hideAlbumInfo);
+
+  </script>
+</body>
+</html>

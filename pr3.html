@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fetch API Example</title>
+</head>
+<body>
+  <h1>Содержимое текстового файла:</h1>
+  <div id="message"></div>
+
+  <script>
+    // Используем Fetch API для загрузки содержимого текстового файла
+    fetch('pr3.txt')
+      .then(response => {
+        // Проверяем успешность запроса
+        if (!response.ok) {
+          throw new Error('Не удалось загрузить файл');
+        }
+        return response.text();  // Получаем текстовый контент
+      })
+      .then(text => {
+        // Выводим содержимое в элемент с id "message"
+        document.getElementById('message').textContent = text;
+      })
+      .catch(error => {
+        // Обрабатываем возможные ошибки
+        document.getElementById('message').textContent = 'Ошибка загрузки файла: ' + error.message;
+      });
+  </script>
+</body>
+</html>

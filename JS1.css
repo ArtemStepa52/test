@@ -1,0 +1,28 @@
+button {
+    border-radius: 10px;
+    padding: 15px 40px;
+    border: 1px solid #000000;
+    background-color: rgb(124, 10, 10);
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    font-family: 'Franklin Gothic Medium';
+    cursor: pointer;
+}
+button:hover {
+    background-color: #000000;
+}
+html {
+    background: url(photo7.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+p {
+    font-size: 30px;
+    font-family: 'Franklin Gothic Medium';
+}
+h1 {
+    font-size: 40px;
+    font-family: 'Franklin Gothic Medium';
+}

@@ -1,0 +1,79 @@
+<html>
+<head>
+    <link rel="stylesheet" href="style2.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Информация об альбомах</title>
+</head>
+<body>
+    <h1>Выберите для просмотра информации об альбоме:</h1>
+    <div class="cd" data-index="0">Empire Burlesque - Bob Dylan</div>
+<div class="cd" data-index="1">Hide your heart - Bonnie Tyler</div>
+<div class="cd" data-index="2">Greatest Hits - Dolly Parton</div>
+<div class="cd" data-index="3">Still got the blues - Gary Moore</div>
+<div class="cd" data-index="4">Eros - Eros Ramazzotti</div>
+<div class="cd" data-index="5">One night only - Bee Gees</div>
+<div class="cd" data-index="6">Sylvias Mother - Dr.Hook</div>
+<div class="cd" data-index="7">Maggie May - Rod Stewart</div>
+<div class="cd" data-index="8">Romanza - Andrea Bocelli</div>
+<div class="cd" data-index="9">When a man loves a woman - Percy Sledge</div>
+<div class="cd" data-index="10">Black angel - Savage Rose</div>
+<div class="cd" data-index="11">1999 Grammy Nominees - Many</div>
+<div class="cd" data-index="12">For the good times - Kenny Rogers</div>
+<div class="cd" data-index="13">Big Willie style - Will Smith</div>
+<div class="cd" data-index="14">Tupelo Honey - Van Morrison</div>
+<div class="cd" data-index="15">Soulsville - Jorn Hoel</div>
+<div class="cd" data-index="16">The very best of - Cat Stevens</div>
+<div class="cd" data-index="17">Stop - Sam Brown</div>
+<div class="cd" data-index="18">Bridge of Spies - T'Pau</div>
+<div class="cd" data-index="19">Private Dancer - Tina Turner</div>
+<div class="cd" data-index="20">Midt om natten - Kim Larsen</div>
+<div class="cd" data-index="21">Pavarotti Gala Concert - Luciano Pavarotti</div>
+<div class="cd" data-index="22">The dock of the bay - Otis Redding</div>
+<div class="cd" data-index="23">Picture book - Simply Red</div>
+<div class="cd" data-index="24">Red - The Communards</div>
+<div class="cd" data-index="25">Unchain my heart - Joe Cocker</div>
+
+    <div id="album-info" class="info"></div>
+
+    <script>
+        function loadXMLDoc() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "catalog.xml", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    displayCDs(xhr.responseXML);
+                }
+            };
+            xhr.send();
+        }
+    
+        function displayCDs(xml) {
+            const cds = xml.getElementsByTagName("CD");
+            const cdElements = document.querySelectorAll('.cd');
+    
+            cdElements.forEach((cdElement, index) => {
+                cdElement.addEventListener('click', function () {
+                    const title = cds[index].getElementsByTagName("TITLE")[0].textContent;
+                    const artist = cds[index].getElementsByTagName("ARTIST")[0].textContent;
+                    const country = cds[index].getElementsByTagName("COUNTRY")[0].textContent;
+                    const company = cds[index].getElementsByTagName("COMPANY")[0].textContent;
+                    const price = cds[index].getElementsByTagName("PRICE")[0].textContent;
+                    const year = cds[index].getElementsByTagName("YEAR")[0].textContent;
+    
+                    const infoDiv = document.getElementById('album-info');
+                    infoDiv.innerHTML = `<strong>Название:</strong> ${title}<br/>
+                                         <strong>Исполнитель:</strong> ${artist}<br/>
+                                         <strong>Страна:</strong> ${country}<br/>
+                                         <strong>Компания:</strong> ${company}<br/>
+                                         <strong>Цена:</strong> $${price}<br/>
+                                         <strong>Год:</strong> ${year}`;
+                    infoDiv.style.display = 'block'; 
+                });
+            });
+        }
+    
+        window.onload = loadXMLDoc;
+    </script>
+    
+    </body>
+    </html>
